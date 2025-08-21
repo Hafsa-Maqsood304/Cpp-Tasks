@@ -33,7 +33,7 @@ int main() {
     cout<<"factorial of 2nd no.="<<factor(b)<<endl;
     return 0;
 }
-
+*/
 
 
 
@@ -42,11 +42,16 @@ int main() {
 #include <iostream>
 using namespace std;
 string check(int num){
-if(num%2==0)
-
-return "not prime";
-else 
-return "prime";
+   if (num <= 1) {
+        return "not prime"; 
+    } else {
+        for (int i = 2; i <= num / 2; i++) {
+            if (num % i == 0) {
+                return "not prime";
+            }
+        }
+    }
+    return "prime";
 }
 
 int main(){
@@ -58,25 +63,7 @@ int main(){
 
 
 
-
-
-
-#include <iostream>
-#include <string>
-using namespace std;
-int main(){
-    cout << "hello";
-    cout << "Enter your name:";
-    string name;
-    cin >> name;
-    cout << "Enter your age:";
-    int age;
-    cin>> age;
-   cout<<"Your name is "<<name<<"and you are"<<age<<"years old";
-   return 0;
-}
-
-
+/*
  Write a function to calculate the square of a number.
 #include <iostream>
 using namespace std;
@@ -93,8 +80,8 @@ int main() {
 
     return 0;
 }*/
-
-//Make a function that returns the maximum of two numbers.
+/*
+Make a function that returns the maximum of two numbers.
 #include <iostream>
 using namespace std;
 int max(int num1,int num2){
@@ -115,7 +102,7 @@ int main(){
 
 
 
-/* for (int i = 1; i <= 5; i++) {
+for (int i = 1; i <= 5; i++) {
         sum = sum + i;
 
 //Write a function to calculate factorial of a number.
