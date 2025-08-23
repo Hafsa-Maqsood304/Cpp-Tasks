@@ -33,7 +33,7 @@ int main() {
     cout<<"factorial of 2nd no.="<<factor(b)<<endl;
     return 0;
 }
-*/
+
 
 
 
@@ -61,6 +61,8 @@ int main(){
     cout <<check(a);
 }
 
+
+*/
 
 
 /*
@@ -123,10 +125,81 @@ int main(){
 }*/
 
 
+// 5. Basic Banking System
+
+// Features:
+
+// Deposit, withdraw, check balance
+
+// Functions:
+
+// deposit(), withdraw(), checkBalance() 
 
 
 
 
+#include<iostream>
+#include<string>
+using namespace std;
+
+
+
+int deposit(int &balance,int amount){
+        balance += amount;
+        return balance;
+    }
+int withdraw (int &balance,int amount){
+        balance -= amount;
+        return balance;
+    }
+    
+void check(int balance){
+        cout<<balance<<endl;
+    }
+int main(){
+
+int option;
+int balance=2000;
+int amount;
+
+
+
+
+while(true){
+    
+    cout << "1. To Deposit"<<endl;
+    cout << "2. To Withdraw"<<endl;
+    cout << "3. To Check Balance"<<endl;
+
+    cin>>option;
+
+    switch (option)
+    {
+    case 1:
+            {
+            cout<<"enter the amount"<<endl;
+            cin>>amount;
+            int remaining=deposit(balance,amount);
+            cout<<"your remaining balance is " <<remaining<<endl;
+
+
+            }
+    break;
+    case 2:
+    { cout<<"enter the amount"<<endl;
+            cin>>amount;
+            int remaining=withdraw(balance,amount);
+            cout<<"your remaining balance is " <<remaining<<endl;    }
+    break;
+    case 3:
+            check(balance);
+    default:
+        break;
+    }
+
+}
+return 0;
+}
 
 
 
