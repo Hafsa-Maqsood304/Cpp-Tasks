@@ -16,7 +16,9 @@ static book books[30];
 void addbook(book &b){
 
     cout <<"Enter the Title:"<<endl;
-    cin>>b.title;
+    cin.ignore();
+    getline(cin ,b.title);   
+    //cin>>b.title;
     cout <<"Enter Author's Name:"<<endl;
     cin>>b.author;
     cout <<"Publishing year:"<<endl;
