@@ -85,11 +85,19 @@ void printstudent(students s){
    void averageofall(students s){
     int sum= s.marks[0]+s.marks[1]+s.marks[2];
     cout <<"Your average="<<sum/3;
+
+
     
 }
  
    
-   
+   students search(int rollno,students s[]){
+    for(int i=0;i<10;i++)
+    {
+        if(rollno==s[i].rollno)
+        return s[i];
+    }
+   }
    
    
    
@@ -99,14 +107,21 @@ void printstudent(students s){
     students s[10];
        
 
+    int num=0;
+    cout <<"How many time you wanna see results";
+    cin>>num;
     int i=0;
-    while(i < 10 ){
+    while( i < num ){
        inputstudents(s[i]);
        printstudent(s[i]);
        highestinsubjec(s[i]);
        averageofall(s[i]);
       i++;
     }
+
+    students s1;
+    s1=search(2,s);
+    printstudent(s1);
       
    }
 
