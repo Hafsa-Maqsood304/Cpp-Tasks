@@ -13,9 +13,9 @@ class SingleLinkedList{
     }
     
     int ListLength(){
-        int length;
+        int length=0;
         node* P =head;
-        while(P->next!=NULL){
+        while(P!=NULL){
             length++;
             P= P->next;
         }
@@ -23,6 +23,7 @@ class SingleLinkedList{
     }
     
     void insert_at_head(int value){
+        
         node *temp=new node;
         temp->data=value;
         temp->next=head;
@@ -41,6 +42,13 @@ class SingleLinkedList{
         
         node *temp=new node;//data + next address
         temp->data=value;
+
+           if(head == NULL){
+            head = temp;
+            temp->next = NULL;
+            cout<<"\nList was empty. so, a head node is inserted\n";
+            return;
+        }
            node* ptr=head;// pointer contains head address
            while(ptr->next!=NULL){
             ptr=ptr->next;
@@ -54,7 +62,7 @@ class SingleLinkedList{
         cout<<"Position where you wanna insert: ";
         cin>>position;
         int count=ListLength();
-        if(!(position<=count)){
+        if(!(position<count && position>=0)){
             cout<<"\nInvalid position!\n";
         }
         else{
@@ -62,7 +70,7 @@ class SingleLinkedList{
         int i=0;
         while(i<position){
             ptr= ptr->next;
-        }
+            i++;        }
         node* temp=new node;
         temp->data=value;
         temp->next=ptr->next;
@@ -76,6 +84,7 @@ class SingleLinkedList{
     if(head == NULL)  
     {  
         cout<<"\nList is empty\n";  
+        return -1;
     }  
     else   
     {  
@@ -114,14 +123,16 @@ class SingleLinkedList{
         cin>>position;
         int count=ListLength();
 
-        if(!(position<=count)){
+        if(!(position<count && position>=0)){
             cout<<"\nInvalid position!\n";
+            return -1;
         }
         else{
             node* ptr=head;
             int i=0;
             while(i<position){
                 ptr= ptr->next;
+                i++;
             }
             node* nextnode=ptr->next;
             ptr->next=nextnode->next;
@@ -138,7 +149,7 @@ class SingleLinkedList{
         while(temp!=NULL){
             if(temp->data==d){
                 cout<<"\nData "<<d<<" found!\n";
-                break;
+                return;
             }else{
                 temp=temp->next;
             }
@@ -158,32 +169,25 @@ class SingleLinkedList{
     }
     //Task 2
     SingleLinkedList ConcatenateList(SingleLinkedList L1, SingleLinkedList L2){
-        
-        SingleLinkedList NewList;
-        if(L1.head == NULL && L2.head == NULL){
-            return NewList;
-        }
-        node* tmp=L1.head;
-        node* newnode=new node;
-        newnode->data=tmp->data;
-        NewList.head=newnode;
-        tmp=tmp->next;
-        while(tmp->next != NULL){
-            NewList.insert_at_end(tmp->data);
-            tmp=tmp->next;
-        }
-        node* tmp1=L2.head;
-        node* newnode1=new node;
-        newnode1->data=tmp1->data;
-        NewList.head=newnode1;
-        tmp1=tmp1->next;
 
-        while(tmp1->next != NULL){
-            NewList.insert_at_end(tmp1->data);
-            tmp1=tmp1->next;
-        }
-        return NewList;
+    SingleLinkedList NewList;
+
+    node* tmp = L1.head;
+
+    while(tmp != NULL){
+        NewList.insert_at_end(tmp->data);
+        tmp = tmp->next;
     }
+
+    node* tmp1 = L2.head;
+
+    while(tmp1 != NULL){
+        NewList.insert_at_end(tmp1->data);
+        tmp1 = tmp1->next;
+    }
+
+    return NewList;
+}
     //task3
     SingleLinkedList MergeListsAlternatively(SingleLinkedList L1, SingleLinkedList L2){
         SingleLinkedList NewList;
