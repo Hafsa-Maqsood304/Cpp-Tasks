@@ -57,26 +57,40 @@ class SingleLinkedList{
            temp->next=NULL; 
            cout<<"\nNode inserted\n" ;       
     }
-    void random_insert(int value){
-        int position;
-        cout<<"Position where you wanna insert: ";
-        cin>>position;
-        int count=ListLength();
-        if(!(position<count && position>=0)){
-            cout<<"\nInvalid position!\n";
-        }
-        else{
-        node* ptr=head;
-        int i=0;
-        while(i<position){
-            ptr= ptr->next;
-            i++;        }
-        node* temp=new node;
-        temp->data=value;
-        temp->next=ptr->next;
-        ptr->next=temp;
+
+void random_insert(int value){
+    int position;
+    cout << "Position where you wanna insert: ";
+    cin >> position;
+
+    int count = ListLength();
+
+    if(position < 0 || position > count){
+        cout << "\nInvalid position!\n";
+        return;
     }
+
+    if(position == 0){
+        insert_at_head(value);
+        return;
     }
+
+    node* ptr = head;
+    int i = 0;
+
+    while(i < position - 1){
+        ptr = ptr->next;
+        i++;
+    }
+
+    node* temp = new node;
+    temp->data = value;
+    temp->next = ptr->next;
+    ptr->next = temp;
+
+    cout << "\nNode inserted\n";
+}
+
 
     int Delete_from_head(){
         int DeletedValue;
@@ -97,51 +111,70 @@ class SingleLinkedList{
 	return DeletedValue;
     }
 
-    int Delete_from_end(){
-        int DeletedValue;
-        node* ptr1;
-        node* ptr;
-        ptr=ptr1=head;
-        int count=0;
-        while(ptr->next!=NULL){
-            ptr1=ptr;
-            ptr=ptr->next;
-            count++;
-        }
-       
-        ptr1->next=NULL;
-   		DeletedValue=ptr->data;
-        delete ptr;
-        cout<<"\nNode deleted from the end ...\n";
-        return DeletedValue;
+    
+int Delete_from_end(){
+    if(head == NULL){
+        cout << "\nList is empty\n";
+        return -1;
     }
+
+    node* ptr = head;
+    node* ptr1 = NULL;
+
+    while(ptr->next != NULL){
+        ptr1 = ptr;
+        ptr = ptr->next;
+    }
+
+    int DeletedValue = ptr->data;
+
+    if(ptr1 == NULL){
+        head = NULL;
+    }
+    else{
+        ptr1->next = NULL;
+    }
+
+    delete ptr;
+
+    cout << "\nNode deleted from the end\n";
+    return DeletedValue;
+}
+
 
     int Random_delete(){
-        int DeletedValue;
-        int position;
-        cout<<"Position where you wanna insert: ";
-        cin>>position;
-        int count=ListLength();
+    int position;
+    cout << "Position to delete: ";
+    cin >> position;
 
-        if(!(position<count && position>=0)){
-            cout<<"\nInvalid position!\n";
-            return -1;
-        }
-        else{
-            node* ptr=head;
-            int i=0;
-            while(i<position){
-                ptr= ptr->next;
-                i++;
-            }
-            node* nextnode=ptr->next;
-            ptr->next=nextnode->next;
-            DeletedValue= nextnode->data;
-            delete nextnode;
-            cout<<"\nNode deleted successfully!\n";
-            }
-            return DeletedValue;
+    int count = ListLength();
+
+    if(position < 0 || position >= count){
+        cout << "\nInvalid position!\n";
+        return -1;
     }
+
+    if(position == 0){
+        return Delete_from_head();
+    }
+
+    node* ptr = head;
+    int i = 0;
+
+    while(i < position - 1){
+        ptr = ptr->next;
+        i++;
+    }
+
+    node* nextnode = ptr->next;
+    int DeletedValue = nextnode->data;
+
+    ptr->next = nextnode->next;
+    delete nextnode;
+
+    cout << "\nNode deleted successfully!\n";
+    return DeletedValue;
+}
 
 
     void search(int d){
@@ -189,54 +222,58 @@ class SingleLinkedList{
     return NewList;
 }
     //task3
-    SingleLinkedList MergeListsAlternatively(SingleLinkedList L1, SingleLinkedList L2){
-        SingleLinkedList NewList;
-        if(L1.head == NULL && L2.head == NULL){
-            return NewList;
-        }
-        node* tmp=L1.head;
-        NewList.insert_at_head(tmp->data);
-        tmp=tmp->next;
-        node* tmp1=L2.head;
-        NewList.insert_at_end(tmp1->data);
-        tmp1=tmp1->next;
-        while(tmp!=NULL || tmp1!=NULL){
-            if(tmp!=NULL){
+    SingleLinkedList MergeListsAlternatively(
+    SingleLinkedList L1, SingleLinkedList L2){
+
+    SingleLinkedList NewList;
+
+    node* tmp = L1.head;
+    node* tmp1 = L2.head;
+
+    while(tmp != NULL || tmp1 != NULL){
+
+        if(tmp != NULL){
             NewList.insert_at_end(tmp->data);
-            }
-            if(tmp1!=NULL){
-            NewList.insert_at_end(tmp1->data);
-            }
-            tmp=tmp->next;
-            tmp1=tmp1->next;
+            tmp = tmp->next;
         }
-        return NewList;
+
+        if(tmp1 != NULL){
+            NewList.insert_at_end(tmp1->data);
+            tmp1 = tmp1->next;
+        }
     }
 
-    void SortedInsert(int value){
-        if(head==NULL){
-            insert_at_head(value);
-        }
-        else{
-        node* tmp=head;
-        node* prev=head;
-        while(tmp!=NULL){
-            if(value<tmp->data){
-                if(tmp==head){
-                    insert_at_head(value);
-                }
-                else{
-                    node* newnode=new node;
-                    newnode->data=value;
-                    prev->next= newnode;
-                    newnode->next=tmp;                  
-                }
-            }
-            prev=tmp;
-            tmp=tmp->next;
-        }
+    return NewList;
+}
+
+//task4    
+void SortedInsert(int value){
+    if(head == NULL || value < head->data){
+        insert_at_head(value);
+        return;
     }
+
+    node* tmp = head;
+    node* prev = head;
+
+    while(tmp != NULL){
+        if(value < tmp->data){
+            node* newnode = new node;
+            newnode->data = value;
+
+            prev->next = newnode;
+            newnode->next = tmp;
+
+            return;
+        }
+
+        prev = tmp;
+        tmp = tmp->next;
     }
+
+    insert_at_end(value);
+}
+
 
     void display(){
         node *temp=head;

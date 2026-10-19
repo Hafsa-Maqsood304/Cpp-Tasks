@@ -1,26 +1,22 @@
 #include <iostream>
 using namespace std;
 //Task no. 2
+const int size=10;
 class Queue{
     public:
     int back;
-    int queue[10];
+    int queue[size];
     Queue(){
         back=-1;
-        queue[10]=0;
+        for(int i=0;i<size;i++){
+            queue[i]=0;
+        }
     }
     bool isEmpty(){
-        if(back==-1){
-            return true;
-        }
-        else 
-        return false;
+        return back==-1;
     }
     bool isFull(){
-        if(back==9){
-            return true;
-        }
-        return false;
+        return back==size-1;
     }
     int peek(){
         if(isEmpty()){
@@ -70,26 +66,20 @@ int main(){
 class Stack{
     public:
     int Top;
-    int stack[10];
+    int stack[size];
     Stack(){
         Top=-1;
-        stack[10]=0;    
+        for(int i=0;i<size;i++){
+            stack[i]=0;
+        }
     }
 
     bool isEmpty(){
-        if(Top==-1){
-            return true;
-        }
-        else
-        return false;
+        return Top==-1;
     }
     
     bool isFull(){
-        if(Top==9){
-            return true;
-        }
-        else 
-        return false;
+        return Top==size-1;
     }
     
     void push(int value){
