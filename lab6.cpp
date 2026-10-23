@@ -13,7 +13,7 @@ class DoublyLinkedList{
         head=NULL;
     }
     
-    int ListLength(){
+    int size_of_list(){
         int length=0;
         node* P =head;
         while(P!=NULL){
@@ -68,7 +68,7 @@ void random_insert(int value){
     cout << "Position where you wanna insert: ";
     cin >> position;
 
-    int count = ListLength();
+    int count = size_of_list();
 
     if(position < 0 || position > count){
         cout << "\nInvalid position!\n";
@@ -157,7 +157,7 @@ int Delete_from_end(){
     cout << "Position to delete: ";
     cin >> position;
 
-    int count = ListLength();
+    int count = size_of_list();
 
     if(position < 0 || position >= count){
         cout << "\nInvalid position!\n";
@@ -222,7 +222,6 @@ int main(){
     DoublyLinkedList L1;
     L1.insert_at_head(33);
     L1.insert_at_end(32);
-    L1.search(33);
     L1.display();
     L1.Delete_from_head();
     L1.search(33);
