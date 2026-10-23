@@ -273,7 +273,29 @@ void SortedInsert(int value){
 
     insert_at_end(value);
 }
-
+//task # 5
+void RemoveDuplicates(){
+        node *temp = head;
+        while(temp != NULL){
+            node *runner = temp->next;
+            while(runner != NULL){
+                if(runner->data == temp->data){
+                    node *tmp1 = runner;
+                    runner = runner->next;
+                    if(tmp1 != head){
+                        temp->next = tmp1->next;
+                    }
+                    if(tmp1->next != NULL){
+                        temp->next = runner;
+                    }
+                    delete tmp1;
+                } else {
+                    runner = runner->next;
+                }
+            }
+            temp = temp->next;
+        }
+}
 
     void display(){
         node *temp=head;

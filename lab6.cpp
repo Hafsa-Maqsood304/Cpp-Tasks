@@ -202,7 +202,7 @@ int Delete_from_end(){
         cout<<"\nData not found\n";
     }
     
-
+    
     void display(){
         node *temp=head;
         if(temp==NULL){
