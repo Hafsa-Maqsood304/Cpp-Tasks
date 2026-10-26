@@ -30,7 +30,30 @@ class Queue{
             cout<<"\n"<<num<<" is removed from queue.";
         }
     }
-    
+    void PrintJobScheduling(int n){
+        cout<<"\nJob Scheduling: ";
+        for(int i=0; i<n; i++){
+            if(queue.empty()){
+                cout<<"\nqueue is empty!"<<endl;
+                return;
+            }
+            int num=queue.front(); 
+            queue.pop_front();
+            cout<<num<<" ";
+        }
+    }
+    void BankCounterSimulation(int n){
+        cout<<"\nBank Counter Simulation: ";
+        for(int i=0; i<n; i++){
+            if(queue.empty()){
+                cout<<"\nqueue is empty!"<<endl;
+                return;
+            }
+            int num=queue.front(); 
+            queue.pop_front();
+            cout<<num<<" ";
+        }
+    }
 };
 class Stack{
     public:
@@ -148,5 +171,17 @@ int main(){
     s.IsValid("([)]");
     s.IsValid("{[]}");
     s.ReverseString("Hello");
+
+    Queue q1;
+    q1.Enqueue(1);
+    q1.Enqueue(2);
+    q1.Enqueue(3);
+    q1.PrintJobScheduling(3);
+
+    Queue q2;
+    q2.Enqueue(4);
+    q2.Enqueue(5);
+    q2.Enqueue(6);
+    q2.BankCounterSimulation(3);
     return 0;
 }
