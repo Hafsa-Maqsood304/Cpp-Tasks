@@ -62,7 +62,7 @@ int main(){
 }
 
 //Task no. 1
-/*
+
 class Stack{
     public:
     int Top;
@@ -123,4 +123,4 @@ int main(){
     s.pop();
     s.display();
 }
-    */
+    

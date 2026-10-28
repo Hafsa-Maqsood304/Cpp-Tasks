@@ -144,6 +144,25 @@ class Stack{
             st.pop();
         }
     }
+
+    //Lab Quiz Question no. 1
+    void DecimalToBinary(int value){
+        Stack S;
+        if(value==0){
+            cout<<0;
+            return;
+        }
+        while(value>0){
+            S.push(value%2);
+            value=value/2;
+        }
+
+        while(!S.empty()){
+            cout<<S.Peek();
+            S.pop();
+            
+        }
+    }
 };
 
 int main(){
@@ -171,6 +190,7 @@ int main(){
     s.IsValid("([)]");
     s.IsValid("{[]}");
     s.ReverseString("Hello");
+    s.DecimalToBinary(13);
 
     Queue q1;
     q1.Enqueue(1);
@@ -183,5 +203,8 @@ int main(){
     q2.Enqueue(5);
     q2.Enqueue(6);
     q2.BankCounterSimulation(3);
+
+
+
     return 0;
 }
